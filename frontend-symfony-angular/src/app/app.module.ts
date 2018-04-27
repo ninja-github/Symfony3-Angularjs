@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-//added
 import { AppComponent } from './app.component';
+//added
+import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { PostService } from './services/post/post.service';
+import { RouterModule } from '@angular/router';
+import { routes } from './routes/routes';
 
 
 
@@ -21,10 +23,12 @@ import { PostService } from './services/post/post.service';
     AddPostComponent,
     EditPostComponent,
     DeletePostComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [AuthService, PostService, AuthGuard],
   bootstrap: [AppComponent]
