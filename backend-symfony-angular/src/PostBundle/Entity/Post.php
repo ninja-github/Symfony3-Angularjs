@@ -15,7 +15,7 @@ class Post
     /**
      * @var string
      */
-    private $titre;
+    private $title;
 
     /**
      * @var string
@@ -34,27 +34,27 @@ class Post
     }
 
     /**
-     * Set titre
+     * Set title
      *
-     * @param string $titre
+     * @param string $title
      *
      * @return Post
      */
-    public function setTitre($titre)
+    public function settitle($title)
     {
-        $this->titre = $titre;
+        $this->title = $title;
 
         return $this;
     }
 
     /**
-     * Get titre
+     * Get title
      *
      * @return string
      */
-    public function getTitre()
+    public function gettitle()
     {
-        return $this->titre;
+        return $this->title;
     }
 
     /**

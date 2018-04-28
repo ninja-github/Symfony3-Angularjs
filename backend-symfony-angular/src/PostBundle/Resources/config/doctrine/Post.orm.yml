@@ -9,7 +9,7 @@ PostBundle\Entity\Post:
             generator:
                 strategy: AUTO
     fields:
-        titre:
+        title:
             type: string
             length: 255
         description:
