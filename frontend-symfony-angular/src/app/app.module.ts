@@ -13,6 +13,9 @@ import { AuthGuard } from './guard/auth.guard';
 import { PostService } from './services/post/post.service';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes/routes';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { IndexComponent } from './index/index.component';
 
 
 
@@ -24,11 +27,14 @@ import { routes } from './routes/routes';
     EditPostComponent,
     DeletePostComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpModule,
+    FormsModule
   ],
   providers: [AuthService, PostService, AuthGuard],
   bootstrap: [AppComponent]

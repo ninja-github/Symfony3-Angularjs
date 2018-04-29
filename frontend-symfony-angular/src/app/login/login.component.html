@@ -1,3 +1,25 @@
-<p>
-  login works!
-</p>
+<div class="modal-dialog" role="document">
+  <div class="col-9">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+      </div>
+      <form (submit)="login($event)">
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <input class="form-control" placeholder="Username" id="username" name="username" required [(ngModel)]="username" type="text">
+          </div>
+          <div class="form-group">
+            <input class="form-control" placeholder="Password" id="password" name="password" required [(ngModel)]="password" type="password">
+          </div>
+          <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+      </form>
+      <p>  You don't have an Acount? <a href="#">Create an Account</a>
+    </div>
+  </div>
+</div>

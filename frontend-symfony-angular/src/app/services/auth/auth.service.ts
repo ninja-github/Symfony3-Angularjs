@@ -10,13 +10,11 @@ import 'rxjs/add/observable/throw';
 export class AuthService {
 
   public token: string;
-
+  sessionActived: boolean=false;
   constructor(private http: Http) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }
-
-
 
   login(username: string, password: string): Observable<boolean> {
     let headers = new Headers();
@@ -24,7 +22,6 @@ export class AuthService {
     let body = new URLSearchParams();
     body.set('username', username);
     body.set('password', password);
-
 
     return this.http.post('http://127.0.0.1:8000/api/login_check', body, { headers: headers })
       .map((response: Response) => {
@@ -36,7 +33,6 @@ export class AuthService {
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
-
           // return true to indicate successful login
           return true;
         } else {
