@@ -10,7 +10,8 @@ import 'rxjs/add/observable/throw';
 export class AuthService {
 
   public token: string;
-  sessionActived: boolean=false;
+  loginCheckUri: string = 'http://127.0.0.1:8000/api/login_check';
+  // sessionActived: boolean=false;
   constructor(private http: Http) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
@@ -23,14 +24,13 @@ export class AuthService {
     body.set('username', username);
     body.set('password', password);
 
-    return this.http.post('http://127.0.0.1:8000/api/login_check', body, { headers: headers })
+    return this.http.post(this.loginCheckUri, body, { headers: headers })
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         const token = response.json() && response.json().token;
         if (token) {
           // set token property
           this.token = token;
-
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
           // return true to indicate successful login

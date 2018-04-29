@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { PostComponent } from './post/post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
-import { DeletePostComponent } from './delete-post/delete-post.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guard/auth.guard';
@@ -25,7 +24,6 @@ import { IndexComponent } from './index/index.component';
     PostComponent,
     AddPostComponent,
     EditPostComponent,
-    DeletePostComponent,
     LoginComponent,
     HomeComponent,
     IndexComponent

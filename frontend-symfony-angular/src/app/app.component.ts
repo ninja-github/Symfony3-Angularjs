@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     else this.sessionActive = false;
   }
   ngOnInit() {
-    console.log(' app oninit ');
+    // console.log(' app oninit ');
   }
   
   

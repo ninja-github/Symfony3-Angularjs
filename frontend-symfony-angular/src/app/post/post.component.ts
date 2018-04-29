@@ -20,8 +20,15 @@ export class PostComponent implements OnInit {
 
   getPosts() {
     this._postService.getPosts().subscribe(
-      posts => this.posts = posts,      
-      error => this.errorMessage = <any>error
+      posts => {
+        this.posts = posts,
+        console.log('posts => ',posts);
+      },      
+      error => {
+        this.errorMessage = <any>error
+        console.log('error => ', error);
+        
+      }
     );
   }
   

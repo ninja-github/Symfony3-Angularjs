@@ -22,10 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(e) {
-
     e.preventDefault();
-   
-    
     if (this.username != null || this.password != null ) {
     
       this.authService.login(this.username, this.password)
@@ -35,7 +32,6 @@ export class LoginComponent implements OnInit {
 
         }, loginError => this.error = loginError.message + ' : verify  your username or password !  ');
     } else this.error =' verify  your username or password !  '
-    
   }
 
 }

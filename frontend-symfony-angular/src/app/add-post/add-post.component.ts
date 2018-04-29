@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../services/post/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-post',
@@ -7,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPostComponent implements OnInit {
 
-  constructor() { }
+  title: string;
+  description: string;
+  errors = [];
+
+  constructor(private _postService: PostService, private router: Router) { }
+
+  addPost(title, description) {
+
+    let post: any;
+    post = { title: title, description: description };
+    this._postService.addPost(post).subscribe((result => {
+      console.log('added successfuly 1');
+      this.router.navigate(['/posts']);
+
+    }), addError => this.errors = addError);
+
+  }
+
 
   ngOnInit() {
   }

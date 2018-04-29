@@ -13,7 +13,6 @@ import 'rxjs/add/observable/throw';
 export class PostService {
 
   private uri = 'http://127.0.0.1:8000/api/posts';
-  requestResults: Observable<any[]>;
 
   constructor(private http: Http, private authService: AuthService) { }
 
@@ -24,6 +23,14 @@ export class PostService {
           .map(res => <Post[]>res.json())
           .catch(this.handelError);
   }
+
+  // getSelectedPost(id): Observable<any> {
+  //   const headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
+  //   return this.http
+  //     .get(this.uri + '/' + id, { headers: headers })
+  //     .map(res => <Post>res.json())
+  //     .catch(this.handelError);
+  // }
 
   addPost(post: Post) {
     const headers = new Headers();
@@ -43,7 +50,7 @@ export class PostService {
     headers.append('Authorization', 'Bearer ' + this.authService.token);
     return this.http
           .put(this.uri + '/' + id, JSON.stringify(post), { headers: headers })
-          .map(res => res.json())
+          .map(res => console.log(res.json()))
           .catch(this.handelError);
   }
 
@@ -57,8 +64,11 @@ export class PostService {
   }
 
 
-  private handelError(error: Response) {
-    return Observable.throw(error.json().errors || 'server error');
+  private handelError(error: Response | any) {
+    let errMsg = (error.message) ? error.message :
+      error.status ? error.status + " - " + error.statusText : 'Server error';
+    return Observable.throw(error.status);
+    // return Observable.throw(error.json() || 'server error');  
   }
 
 }
