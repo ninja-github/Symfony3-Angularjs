@@ -9,33 +9,40 @@ import { PostService } from '../services/post/post.service';
 })
 export class PostComponent implements OnInit {
 
-  posts: Array<Post> = [];
+  posts: Post[] = [];
   errorMessage: string = '';
-  constructor(private _postService: PostService) { }
+  constructor(private postService: PostService) { 
+    // console.log(JSON.parse(localStorage.getItem('currentUser')).username);
+  }
 
-  
+  post: Post;
   ngOnInit() {
     this.getPosts();
+    // console.log('Post Init => ',this.post);
+    
   }
 
   getPosts() {
-    this._postService.getPosts().subscribe(
-      posts => {
-        this.posts = posts,
-        console.log('posts => ',posts);
+    this.postService.getPosts().subscribe(
+      posts => { 
+        console.log('getPosts result => ', posts);
+        this.posts = posts
       },      
-      error => {
-        this.errorMessage = <any>error
-        console.log('error => ', error);
-        
-      }
+      error => { this.errorMessage = <any>error }
     );
   }
   
   deletePost(id) {
-    this._postService.deletePost(id).subscribe(
-      result => {
+    this.postService.deletePost(id).subscribe(
+      result => { 
         window.location.reload();
+        // this.errorMessage = result.message;
+        console.log('deleted');
+        
+      },
+      error => { 
+        this.errorMessage = <any>error;
+        console.log(this.errorMessage);
       }
     );
   }

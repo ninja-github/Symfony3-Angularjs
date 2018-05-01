@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../models/Post';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-edit-post',
@@ -10,43 +11,45 @@ import { Post } from '../models/Post';
 })
 export class EditPostComponent implements OnInit {
 
-  title: string = '';
-  description: string = '';
-  public id: number;
   errors = [];
-  // post: Post;
-  // errorMessage: string = '';
+  post: Post = {
+    id: 0,
+    title: '',
+    description: ''
+  };
+
+  errorMessage: string = '';
+  successMessage: string = null;
+  Updated:boolean =false;
+
   constructor(private router: Router, private route: ActivatedRoute, private postService: PostService) { 
-    this.id = this.route.snapshot.params['id'];
-    // console.log('id => ',this.id);
-
-    // this.postService.getSelectedPost(this.id).subscribe(
-    //   post => {
-    //     this.post = post,
-    //   },
-    //   error => {
-    //     this.errorMessage = <any>error
-    //     console.log('error => ', this.errorMessage);
-
-    //   }
-    // );
-    
+    this.post.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
-    
-    // console.log('ini post => ',this.post);
+   this.postService.getSelectedPost(this.post.id)
+   .subscribe(
+      post => {
+        this.post = post
+        console.log('post => ', this.post);
+      },
+      error => {
+        this.errorMessage = <any>error
+        console.log('error => ', this.errorMessage);
+      }
+    );
   }
 
-  
-  editPost(title, description) {
-    let post: any;
-    post = { title: title, description: description };
-    this.postService.updatePost(post, this.id).subscribe((result => {
-      console.log('updeted');
-      this.router.navigate(['/posts']);
+  editPost(post:Post) {
+    this.postService.updatePost(post, post.id).subscribe(
+      result => {
+        this.successMessage = result.message;
+        this.Updated =true;
+        console.log('result => ', this.successMessage);
 
-    }), editError => this.errors = editError);
+      // this.router.navigate(['/posts']);
+
+    }, editError => this.errors = editError);
 
   }
 

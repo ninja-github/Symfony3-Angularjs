@@ -11,11 +11,12 @@ export class AppComponent implements OnInit {
   sessionActive: boolean = false;
 
   constructor(private authService: AuthService) { 
-    if (localStorage.getItem('currentUser')) this.sessionActive = true;
-    else this.sessionActive = false;
+    console.log('app const ');
   }
   ngOnInit() {
-    // console.log(' app oninit ');
+    if (localStorage.getItem('currentUser')) this.sessionActive = true;
+    else this.sessionActive = false;
+    console.log('app oninit ');
   }
   
   

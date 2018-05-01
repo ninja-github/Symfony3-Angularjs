@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-4">
     <div class="card" style="margin-bottom: 10px">
-      <form (submit)="addPost(title,description)">  
       <div class="card-header">
         Add Post
       </div>
@@ -16,9 +15,8 @@
         </div>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary float-right">Add</button>
+        <button type="button" (click)="addPost(title,description)" class="btn btn-sm btn-primary float-right">Add</button>
       </div>
-      </form>
     </div>
   </div>
   <div *ngFor="let error of errors" class="alert alert-danger">

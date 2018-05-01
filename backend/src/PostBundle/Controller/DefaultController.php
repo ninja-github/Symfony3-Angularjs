@@ -13,6 +13,25 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     
+
+
+     /**
+     * @Route("/api/check_token",name="check_token")
+     * @Method({"GET"})
+     */
+
+    public function checkTokenAction()
+    {
+            $response=array(
+
+                'code'=>1,
+                'message'=>'Expired JWT Token!',
+                'errors'=>null,
+                'result'=>null
+
+            );
+            return new JsonResponse($response, Response::HTTP_NOT_FOUND);
+    }
     /**
      * @Route("/api/posts",name="list_posts")
      * @Method({"GET"})
@@ -22,30 +41,30 @@ class DefaultController extends Controller
     {
         $posts=$this->getDoctrine()->getRepository(Post::class)->findAll();
 
-        if (!count($posts)){
-            $response=array(
+        // if (!count($posts)){
+        //     $response=array(
 
-                'code'=>1,
-                'message'=>'No posts found!',
-                'errors'=>null,
-                'result'=>null
+        //         'code'=>1,
+        //         'message'=>'No posts found!',
+        //         'errors'=>null,
+        //         'result'=>null
 
-            );
-            return new JsonResponse($response, Response::HTTP_NOT_FOUND);
-        }
+        //     );
+        //     return new JsonResponse($response, Response::HTTP_NOT_FOUND);
+        // }
 
 
         $data=$this->get('jms_serializer')->serialize($posts,'json');
 
-        $response=array(
+        // $response=array(
 
-            'code'=>0,
-            'message'=>'success',
-            'errors'=>null,
-            'result'=>json_decode($data)
+        //     'code'=>0,
+        //     'message'=>'success',
+        //     'errors'=>null,
+        //     'result'=>json_decode($data)
 
-        );
-        return new JsonResponse($response,200);
+        // );
+        return new JsonResponse(json_decode($data),200);
     }
 
     /**
@@ -56,27 +75,27 @@ class DefaultController extends Controller
     {
         $post=$this->getDoctrine()->getRepository(Post::class)->find($id);
 
-        if (empty($post)){
-            $response=array(
-                'code'=>1,
-                'message'=>'post not found',
-                'error'=>null,
-                'result'=>null
-            );
-            return new JsonResponse($response, Response::HTTP_NOT_FOUND);
-        }
+        // if (empty($post)){
+        //     $response=array(
+        //         'code'=>1,
+        //         'message'=>'post not found',
+        //         'error'=>null,
+        //         'result'=>null
+        //     );
+        //     return new JsonResponse($response, Response::HTTP_NOT_FOUND);
+        // }
 
         $data=$this->get('jms_serializer')->serialize($post,'json');
 
-        $response=array(
+        // $response=array(
 
-            'code'=>0,
-            'message'=>'success',
-            'errors'=>null,
-            'result'=>json_decode($data)
+        //     'code'=>0,
+        //     'message'=>'success',
+        //     'errors'=>null,
+        //     'result'=>json_decode($data)
 
-        );
-        return new JsonResponse($response,200);
+        // );
+        return new JsonResponse(json_decode($data),200);
     }
 
 

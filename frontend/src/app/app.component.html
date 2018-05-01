@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand"  href="/">Website</a>
+  <a class="navbar-brand"  href="">Website</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home
+        <a class="nav-link" href="">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
@@ -18,13 +18,10 @@
         <a class="nav-link"href="add-post">Add Post</a>
       </li>
       <li class="nav-item" *ngIf="sessionActive">
-        <a class="nav-link"href="edit-post/">Edit Post</a>
+        <a class="nav-link" href="">{{username}}</a>
       </li>
       <li class="nav-item" *ngIf="sessionActive">
-        <a class="nav-link" href="#">{{username}}</a>
-      </li>
-      <li class="nav-item" *ngIf="sessionActive">
-        <a class="nav-link" href="">Logout</a>
+        <a class="nav-link" href="login">Logout</a>
       </li>
       <li class="nav-item" *ngIf="!sessionActive">
         <a class="nav-link" href="login">Login</a>
@@ -35,7 +32,7 @@
 <div class="container">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="/">Home</a>
+      <a href="">Home</a>
     </li>
     <li class="breadcrumb-item">
       <a href="posts">Posts</a>
